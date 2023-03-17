@@ -2,12 +2,12 @@ package pres;
 
 import metier.IMetier;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Presentation {
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
-         IMetier metier = (IMetier) context.getBean("metier");
-        System.out.printf("Résultat => %,.2f °C",metier.calcul());
+        ApplicationContext context = new AnnotationConfigApplicationContext("dao","metier");
+        IMetier metier = context.getBean(IMetier.class);
+        System.out.printf("%,.2f °C",metier.calcul());
     }
 }
